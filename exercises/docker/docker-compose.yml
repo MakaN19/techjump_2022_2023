@@ -1,0 +1,19 @@
+version: "3.9"
+services:
+    web:
+        build: .
+        ports:
+            - 3000:3000
+        depends_on:
+            - redis
+        container_name: "example-app-web-app"
+        environment:
+            - REDIS_URL=redis://@example-app-redis:6379
+
+    redis:
+        image: redis:7-alpine
+        container_name: "example-app-redis"
+
+networks:
+  default:
+    name: example_app
